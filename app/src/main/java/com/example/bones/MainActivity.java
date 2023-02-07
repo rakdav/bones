@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         image1=findViewById(R.id.imageView);
         image2=findViewById(R.id.imageView2);
         result=findViewById(R.id.textView);
+        result.setText("Потрясите телефон");
         sensorManager=(SensorManager) getSystemService(SENSOR_SERVICE);
         sensorAccelerometr=sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         dice= new int[]{R.drawable.dice1, R.drawable.dice2, R.drawable.dice3,
@@ -55,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
                         values[i]=sensorEvent.values[i];
                         s+=values[i];
                     }
-                    if(s>20) {
+                    if(s>18) {
                         Random random1 = new Random();
                         int num1 = random1.nextInt(6);
                         image1.setImageResource(dice[num1]);
