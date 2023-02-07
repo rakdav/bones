@@ -10,12 +10,15 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.Random;
+
 public class MainActivity extends AppCompatActivity {
     private ImageView image1,image2;
     private TextView result;
     private SensorManager sensorManager;
     private Sensor sensorAccelerometr;
     private float[] values=new float[3];
+    private int[] dice;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,7 +28,8 @@ public class MainActivity extends AppCompatActivity {
         result=findViewById(R.id.textView);
         sensorManager=(SensorManager) getSystemService(SENSOR_SERVICE);
         sensorAccelerometr=sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-
+        dice= new int[]{R.drawable.dice1, R.drawable.dice2, R.drawable.dice3,
+                R.drawable.dice4, R.drawable.dice5, R.drawable.dice6};
     }
 
     @Override
@@ -51,7 +55,15 @@ public class MainActivity extends AppCompatActivity {
                         values[i]=sensorEvent.values[i];
                         s+=values[i];
                     }
-                    result.setText(Float.toString(s));
+                    if(s>20) {
+                        Random random1 = new Random();
+                        int num1 = random1.nextInt(6);
+                        image1.setImageResource(dice[num1]);
+                        Random random2 = new Random();
+                        int num2 = random2.nextInt(6);
+                        image2.setImageResource(dice[num2]);
+                        result.setText(Integer.toString(num1 + num2+2));
+                    }
             }
         }
 
